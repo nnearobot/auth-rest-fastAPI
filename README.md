@@ -1,11 +1,11 @@
-# Video Storage API
+# Authentication Server API
 
 This is a simple video storage API that implements a functions listed below:
 
-1. List all the files
-2. Upload a video file
-3. Download a video file by providing its fileId
-3. Delete a file by providing its fileId
+1. Create a user
+2. Get user's information
+3. Update user's information
+3. Delete a user
 
 
 ## Production server building
@@ -41,23 +41,6 @@ FastAPI automatically generates API documentation that is interactive, making it
 
 
 
-## Versioning
-
-Sometimes we need to change a functionality, so the prevoius functionally is totally breaks. We must to provide a reliable and efficient service for users. That is why we always should be sure that our API is up-to-date and bug-free. This is why we use versioning in our API.
-
-
-### Why Versioning is Important
-
-1. **Backwards Compatibility**: By versioning our API, we are able to ensure that previous versions of the API will continue to work as expected. This means that if a user is using an older version of the API (i.e. an older version ov CLI application), they will not be affected by any changes made to the newer versions.
-
-2. **Testing**: Versioning allows us to test new features and changes in a controlled environment before releasing them to the public. This means that we can ensure that the new version of the API is stable and reliable before making it available to our users.
-
-### How to implement versioning in this API
-
-One way to achieve this is by creating a new router.py and schemas.py files. For example, if we are creating version 2 of the API, we should create a new files router_v2.py and schemas_v2.py within the *app/files* directory. Additionally we should add some directives to ./main.py file.
-
-This allows us to keep the new version separate from the previous version, making it easy to maintain and test.
-
 
 ## About this API
 
@@ -88,11 +71,6 @@ FastAPI comes with many useful features out-of-the-box, such as data validation,
 **Scalable Architecture**
 
 FastAPI uses ASGI, a standard for asynchronous web servers and applications, making it highly scalable. It can handle multiple requests concurrently, making it an ideal choice for building high-performance APIs that can handle large traffic volumes.
-
-
-## What may be improved
-
-When we upload a file, its checksum is stored in a database. We can use it to check if the file is corrupted or not before downloading. 
 
 
 ## Developing mode
