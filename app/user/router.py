@@ -64,7 +64,7 @@ def verify_password(stored_password: str, provided_password: str) -> bool:
 # Create an account
 @router.post("/signup", status_code=status.HTTP_200_OK)
 async def add_user(new_user: UserCreate, session: AsyncSession = Depends(get_async_session)):
-    if new_user.user_id is None or new_user.password is None:
+    if not new_user.user_id or not new_user.password:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail={
