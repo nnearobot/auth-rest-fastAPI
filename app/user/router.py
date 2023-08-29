@@ -104,7 +104,7 @@ async def add_user(new_user: UserCreate, session: AsyncSession = Depends(get_asy
 
 #return the user information
 @router.get("/users/{user_id}", status_code=status.HTTP_200_OK)
-async def get_specific_operations(user_id: str, credentials: tuple = Depends(decode_auth_header), session: AsyncSession = Depends(get_async_session)):
+async def get_user_info(user_id: str, credentials: tuple = Depends(decode_auth_header), session: AsyncSession = Depends(get_async_session)):
     auth_user_id, password = credentials
 
     # Ensure user_id in URL matches user_id in Authorization header
@@ -149,7 +149,7 @@ async def get_specific_operations(user_id: str, credentials: tuple = Depends(dec
 
 # Update user information
 @router.patch("/users/{user_id}", status_code=status.HTTP_200_OK)
-async def get_specific_operations(user_id: str, nickname: str = Body(...), comment: str = Body(...), password: str = Body(...), credentials: tuple = Depends(decode_auth_header), session: AsyncSession = Depends(get_async_session)):
+async def update_user_info(user_id: str, nickname: str = Body(...), comment: str = Body(...), password: str = Body(...), credentials: tuple = Depends(decode_auth_header), session: AsyncSession = Depends(get_async_session)):
     if nickname is None and comment is None:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -225,7 +225,7 @@ async def get_specific_operations(user_id: str, nickname: str = Body(...), comme
 
 # Delete an account
 @router.post("/close", status_code=status.HTTP_200_OK)
-async def get_specific_operations(user_id: str, credentials: tuple = Depends(decode_auth_header), session: AsyncSession = Depends(get_async_session)):
+async def delete_user(credentials: tuple = Depends(decode_auth_header), session: AsyncSession = Depends(get_async_session)):
     auth_user_id, password = credentials
 
     # Fetch user from the database
